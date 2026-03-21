@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🚧 Infinity – Real-Time AI Teaching Platform (WIP)
 
-## Getting Started
+⚠️ This project is still under development and not yet complete. Expect unfinished features and ongoing changes.
 
-First, run the development server:
+Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Infinity is a modern Learning Management System (LMS) SaaS application built from scratch using cutting-edge tools.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project is created both as a learning experience and a fun experiment, exploring how AI can transform online education into something more interactive, engaging, and real-time.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+✨ Features (Planned / In Progress)
+- User Authentication (Supabase)
+- Subscriptions & payments (Still Undecided)
+- LMS system (courses, lessons, progress tracking)
+- AI-powered teaching assistant
+- Real-time voice interaction (Still Undecided)
+- Interactive, live learning sessions
+- Clean and modern UI (Next.js + Tailwind)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🛠️ Tech Stack
+Framework: Next.js (App Router)
+Backend / Database: Supabase
+Payments: Undecided
+AI Voice Agent: Undecided
+Styling: Tailwind CSS + custom fonts
 
-## Learn More
+🎯 Purpose
+This project is built to:
+- Learn how to build a full SaaS LMS from scratch
+- Experiment with AI-driven education
+- Have fun building something creative and ambitious
 
-To learn more about Next.js, take a look at the following resources:
+📌 Status
+🚧 In active development
+⚠️ Experimental features
+⚠️ Not production-ready
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Things may break. That’s part of the process 😄
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🤝 Contributing
 
-## Deploy on Vercel
+Contributions, ideas, and feedback are welcome!
+Feel free to open issues or submit pull requests.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+📄 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+License details will be added soon.
