@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-interface CompanionCardProps {
+interface AllyCardProps {
   id: string;
   name: string;
   topic: string;
@@ -10,14 +10,14 @@ interface CompanionCardProps {
   duration: number;
   color: string;
 }
-const CompanionCard = ({
+const AllyCard = ({
   id,
   name,
   topic,
   subject,
   duration,
   color,
-}: CompanionCardProps) => {
+}: AllyCardProps) => {
   return (
     <article className="companion-card" style={{ backgroundColor: color }}>
       <div className="flex justify-between items-center">
@@ -51,4 +51,4 @@ const CompanionCard = ({
   );
 };
 
-export default CompanionCard;
+export default AllyCard;
