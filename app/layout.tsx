@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Geist } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/ui/Navbar";
@@ -24,8 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className={`${bricolage.variable} antialiased`}>
-        <Navbar />
-        {children}
+        <ClerkProvider appearance={{ variables: { colorPrimary: "#D600FF" } }}>
+          <Navbar />
+          {children}
+        </ClerkProvider>
       </body>
     </html>
   );
