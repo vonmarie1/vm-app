@@ -14,7 +14,7 @@ import Image from "next/image";
 import { getSubjectColor } from "@/lib/utils";
 interface AlliesListProps {
   title: string;
-  companions?: Companion[];
+  companions?: Ally[];
   classNames?: string;
 }
 const AlliesList = ({ title, companions, classNames }: AlliesListProps) => {

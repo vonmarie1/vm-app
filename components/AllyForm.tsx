@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
@@ -36,9 +37,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { createAlly } from "@/lib/actions/ally.actions";
 
 const formSchema = z.object({
-  username: z
+  name: z
     .string()
     .min(1, "Ally name is required")
     .min(2, "Ally name must be at least 2 characters"),
@@ -58,11 +60,12 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 export const AllyForm = () => {
+  const router = useRouter();
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
-      username: "",
+      name: "",
       subject: "",
       topic: "",
       voice: "",
@@ -71,22 +74,39 @@ export const AllyForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FormSchema> = (values) => {
-    toast("Ally created successfully!", {
-      description: (
-        <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-          <code>{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      ),
-      position: "bottom-right",
-      classNames: {
-        content: "flex flex-col gap-2",
-      },
-      style: {
-        "--border-radius": "calc(var(--radius) + 4px)",
-      } as React.CSSProperties,
-    });
-    console.log("Form submitted:", values);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const onSubmit: SubmitHandler<FormSchema> = async (values) => {
+    try {
+      setIsLoading(true);
+      console.log("Form submitted:", values);
+
+      // Call the createAlly function
+      const ally = await createAlly(values);
+
+      toast.success("Ally created successfully!", {
+        description: (
+          <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
+            <code>{JSON.stringify(values, null, 2)}</code>
+          </pre>
+        ),
+        position: "bottom-right",
+      });
+
+      // Redirect to the ally's page
+      if (ally?.id) {
+        router.push(`/allies/${ally.id}`);
+      }
+    } catch (error) {
+      console.error("Failed to create ally:", error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to create ally. Please try again.";
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -101,7 +121,7 @@ export const AllyForm = () => {
         <form id="ally-form" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
             <Controller
-              name="username"
+              name="name"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -262,7 +282,7 @@ export const AllyForm = () => {
                     placeholder="15"
                     min="1"
                     max="180"
-                    value={field.value ?? ""}
+                    value={String(field.value ?? "")}
                     onChange={(e) => field.onChange(e.target.valueAsNumber)}
                     onBlur={field.onBlur}
                   />
@@ -283,8 +303,8 @@ export const AllyForm = () => {
           <Button type="button" variant="outline" onClick={() => form.reset()}>
             Reset
           </Button>
-          <Button type="submit" form="ally-form">
-            Create Ally
+          <Button type="submit" form="ally-form" disabled={isLoading}>
+            {isLoading ? "Creating..." : "Create Ally"}
           </Button>
         </Field>
       </CardFooter>
