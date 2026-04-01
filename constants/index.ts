@@ -1,17 +1,17 @@
 export const subjects = [
-  "maths",
-  "language",
-  "science",
-  "history",
-  "coding",
+  "mathematics",
   "economics",
+  "science",
+  "literature",
+  "programming",
+  "history",
 ];
 
 export const subjectsColors = {
   science: "#E5D0FF",
-  maths: "#FFDA6E",
-  language: "#BDE7FF",
-  coding: "#FFC8E4",
+  mathematics: "#FFDA6E",
+  literature: "#BDE7FF",
+  programming: "#FFC8E4",
   history: "#FFECC8",
   economics: "#C8FFDF",
 };
@@ -32,7 +32,7 @@ export const recentSessions = [
   },
   {
     id: "2",
-    subject: "maths",
+    subject: "mathematics",
     name: "Countsy the Number Wizard",
     topic: "Derivatives & Integrals",
     duration: 30,
@@ -40,7 +40,7 @@ export const recentSessions = [
   },
   {
     id: "3",
-    subject: "language",
+    subject: "literature",
     name: "Verba the Vocabulary Builder",
     topic: "English Literature",
     duration: 30,
@@ -48,7 +48,7 @@ export const recentSessions = [
   },
   {
     id: "4",
-    subject: "coding",
+    subject: "programming",
     name: "Codey the Logic Hacker",
     topic: "Intro to If-Else Statements",
     duration: 45,

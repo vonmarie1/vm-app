@@ -164,7 +164,7 @@ export const AllyForm = () => {
                       <SelectItem value="science">Science</SelectItem>
                       <SelectItem value="literature">Literature</SelectItem>
                       <SelectItem value="history">History</SelectItem>
-                      <SelectItem value="languages">Languages</SelectItem>
+                      <SelectItem value="economics">Economics</SelectItem>
                       <SelectItem value="programming">Programming</SelectItem>
                     </SelectContent>
                   </Select>
