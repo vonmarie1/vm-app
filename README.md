@@ -8,9 +8,12 @@ Infinity is a Learning Management System (LMS) where students create custom AI t
 
 - **Real-time AI voice tutoring** — pick a subject, topic, voice, and teaching style, then have a live spoken conversation with your ally, powered by Vapi. Sessions are time-boxed to the duration you configure.
 - **Ally library** — browse, search, and filter allies by subject.
+- **Bookmarking** — save allies for later from any card, with an optimistic-UI toggle.
+- **My Journey dashboard** — a profile page showing the allies you've created, how many you've bookmarked, and your usage against your plan's ally limit.
 - **Authentication** — sign-in/sign-up via Clerk.
 - **Subscription billing** — Free / Core Student / Proactive Learner plans via Clerk Billing (Stripe), with real plan-based limits enforced on how many allies a user can create.
-- **Persistent data** — allies are stored in Supabase (Postgres) with row-level access tied to the signed-in user.
+- **Rate-limited sessions** — voice sessions are capped at 5 starts per 10 minutes per user to guard against runaway API costs.
+- **Persistent data** — allies and bookmarks are stored in Supabase (Postgres) with row-level access tied to the signed-in user.
 
 ## Tech Stack
 
@@ -25,9 +28,8 @@ Infinity is a Learning Management System (LMS) where students create custom AI t
 
 This is a working, deployed project, not a finished commercial product. It's currently running on Vercel's free tier without a custom domain, so Clerk stays on a development instance (production instances require domain verification). Known gaps:
 
-- The "My Journey" profile page is a placeholder — no session history or account dashboard yet.
-- The bookmark button on ally cards is visual only; bookmarking isn't wired up yet.
-- No rate limiting on session creation.
+- No transcript or completed-session history log — "My Journey" shows created/bookmarked allies and plan usage, but not a record of past conversations.
+- No custom loading/error UI — slow database queries just show a blank page rather than a skeleton.
 
 ## Getting Started
 
@@ -45,3 +47,5 @@ NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=
 NEXT_PUBLIC_VAPI_WEB_TOKEN=
 ```
+
+You'll also need to run the SQL migration in `supabase/migrations/` against your Supabase project (SQL Editor → paste the file's contents → run) to create the `bookmarks` and `session_starts` tables, on top of whatever table already backs `allies`.

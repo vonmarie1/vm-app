@@ -1,7 +1,9 @@
+import { auth } from "@clerk/nextjs/server";
+
 import AllyCard from "@/components/AllyCard";
 import SearchInput from "@/components/SearchInput";
 import SubjectFilter from "@/components/SubjectFilter";
-import { getAllAllies } from "@/lib/actions/ally.actions";
+import { getAllAllies, getBookmarkedAllyIds } from "@/lib/actions/ally.actions";
 import { getSubjectColor } from "@/lib/utils";
 
 const AlliesLibrary = async ({ searchParams }: SearchParams) => {
@@ -13,7 +15,12 @@ const AlliesLibrary = async ({ searchParams }: SearchParams) => {
 
   console.log("FILTERS:", { subject, topic });
 
-  const allies = await getAllAllies({ subject, topic });
+  const { userId } = await auth();
+
+  const [allies, bookmarkedIds] = await Promise.all([
+    getAllAllies({ subject, topic }),
+    userId ? getBookmarkedAllyIds(userId) : Promise.resolve([]),
+  ]);
 
   console.log("ALLIES:", allies);
 
@@ -32,6 +39,7 @@ const AlliesLibrary = async ({ searchParams }: SearchParams) => {
             key={ally.id}
             {...ally}
             color={getSubjectColor(ally.subject)}
+            bookmarked={bookmarkedIds.includes(ally.id)}
           />
         ))}
       </section>

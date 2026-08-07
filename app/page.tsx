@@ -1,14 +1,21 @@
+import { auth } from "@clerk/nextjs/server";
+
 import AllyCard from "@/components/AllyCard";
 import AlliesList from "@/components/AlliesList";
 import CTA from "@/components/CTA";
 import { recentSessions } from "@/constants";
-import { getAllAllies } from "@/lib/actions/ally.actions";
+import { getAllAllies, getBookmarkedAllyIds } from "@/lib/actions/ally.actions";
 import { getSubjectColor } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
 const Page = async () => {
-  const popularAllies = await getAllAllies({ limit: 3 });
+  const { userId } = await auth();
+
+  const [popularAllies, bookmarkedIds] = await Promise.all([
+    getAllAllies({ limit: 3 }),
+    userId ? getBookmarkedAllyIds(userId) : Promise.resolve([]),
+  ]);
 
   return (
     <main>
@@ -26,6 +33,7 @@ const Page = async () => {
               subject={ally.subject}
               duration={ally.duration}
               color={getSubjectColor(ally.subject)}
+              bookmarked={bookmarkedIds.includes(ally.id)}
             />
           ))
         )}

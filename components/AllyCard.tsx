@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import BookmarkButton from "@/components/BookmarkButton";
+
 interface AllyCardProps {
   id: string;
   name: string;
@@ -9,6 +11,7 @@ interface AllyCardProps {
   subject: string;
   duration: number;
   color: string;
+  bookmarked?: boolean;
 }
 const AllyCard = ({
   id,
@@ -17,19 +20,13 @@ const AllyCard = ({
   subject,
   duration,
   color,
+  bookmarked = false,
 }: AllyCardProps) => {
   return (
     <article className="companion-card" style={{ backgroundColor: color }}>
       <div className="flex justify-between items-center">
         <div className="subject-badge">{subject}</div>
-        <button className="companion-bookmark">
-          <Image
-            src="/icons/bookmark.svg"
-            alt="bookmark"
-            width={12.5}
-            height={15}
-          />
-        </button>
+        <BookmarkButton allyId={id} initialBookmarked={bookmarked} />
       </div>
       <h2 className="text-2xl font-bold">{name}</h2>
       <p className="text-sm">{topic}</p>

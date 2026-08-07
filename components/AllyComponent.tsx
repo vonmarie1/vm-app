@@ -3,9 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
+import { toast } from "sonner";
 
 import { cn, configureAssistant, getSubjectColor, getSubjectIcon } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
+import { recordSessionStart } from "@/lib/actions/ally.actions";
 import soundwaves from "@/constants/soundwaves.json";
 
 enum CallStatus {
@@ -16,6 +18,7 @@ enum CallStatus {
 }
 
 const AllyComponent = ({
+  companionId,
   subject,
   topic,
   name,
@@ -87,6 +90,16 @@ const AllyComponent = ({
 
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);
+
+    try {
+      await recordSessionStart(companionId);
+    } catch (error) {
+      setCallStatus(CallStatus.INACTIVE);
+      toast.error(
+        error instanceof Error ? error.message : "Failed to start session"
+      );
+      return;
+    }
 
     await vapi.start(configureAssistant(voice, style), {
       variableValues: { subject, topic, style },
