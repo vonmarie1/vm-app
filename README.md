@@ -1,47 +1,47 @@
-🚧 Infinity – Real-Time AI Teaching Platform (WIP)
+# Infinity – Real-Time AI Teaching Platform
 
-⚠️ This project is still under development and not yet complete. Expect unfinished features and ongoing changes.
+Live demo: https://vm-app-eight.vercel.app
 
-Overview
+Infinity is a Learning Management System (LMS) where students create custom AI tutors ("Allies") and have real-time voice conversations with them on any topic. Built as a portfolio project to explore how AI voice agents, subscription billing, and modern full-stack tooling fit together in a real product.
 
-Infinity is a modern Learning Management System (LMS) SaaS application built from scratch using cutting-edge tools.
+## Features
 
-This project is created both as a learning experience and a fun experiment, exploring how AI can transform online education into something more interactive, engaging, and real-time.
+- **Real-time AI voice tutoring** — pick a subject, topic, voice, and teaching style, then have a live spoken conversation with your ally, powered by Vapi. Sessions are time-boxed to the duration you configure.
+- **Ally library** — browse, search, and filter allies by subject.
+- **Authentication** — sign-in/sign-up via Clerk.
+- **Subscription billing** — Free / Core Student / Proactive Learner plans via Clerk Billing (Stripe), with real plan-based limits enforced on how many allies a user can create.
+- **Persistent data** — allies are stored in Supabase (Postgres) with row-level access tied to the signed-in user.
 
-✨ Features (Planned / In Progress)
-- User Authentication (Supabase)
-- Subscriptions & payments (Still Undecided)
-- LMS system (courses, lessons, progress tracking)
-- AI-powered teaching assistant
-- Real-time voice interaction (Still Undecided)
-- Interactive, live learning sessions
-- Clean and modern UI (Next.js + Tailwind)
+## Tech Stack
 
-🛠️ Tech Stack
-Framework: Next.js (App Router)
-Backend / Database: Supabase
-Payments: Undecided
-AI Voice Agent: Undecided
-Styling: Tailwind CSS + custom fonts
+- **Framework:** Next.js 16 (App Router, Turbopack, Server Actions)
+- **Auth & Billing:** Clerk
+- **Database:** Supabase (Postgres)
+- **Voice AI:** Vapi
+- **UI:** Tailwind CSS v4, Radix UI / shadcn components, React Hook Form + Zod
+- **Deployment:** Vercel
 
-🎯 Purpose
-This project is built to:
-- Learn how to build a full SaaS LMS from scratch
-- Experiment with AI-driven education
-- Have fun building something creative and ambitious
+## Status
 
-📌 Status
-🚧 In active development
-⚠️ Experimental features
-⚠️ Not production-ready
+This is a working, deployed project, not a finished commercial product. It's currently running on Vercel's free tier without a custom domain, so Clerk stays on a development instance (production instances require domain verification). Known gaps:
 
-Things may break. That’s part of the process 😄
+- The "My Journey" profile page is a placeholder — no session history or account dashboard yet.
+- The bookmark button on ally cards is visual only; bookmarking isn't wired up yet.
+- No rate limiting on session creation.
 
-🤝 Contributing
+## Getting Started
 
-Contributions, ideas, and feedback are welcome!
-Feel free to open issues or submit pull requests.
+```bash
+npm install
+npm run dev
+```
 
-📄 License
+You'll need your own API keys for Clerk, Supabase, and Vapi in a `.env.local` file:
 
-License details will be added soon.
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=
+NEXT_PUBLIC_VAPI_WEB_TOKEN=
+```
