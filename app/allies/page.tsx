@@ -4,7 +4,7 @@ import SubjectFilter from "@/components/SubjectFilter";
 import { getAllAllies } from "@/lib/actions/ally.actions";
 import { getSubjectColor } from "@/lib/utils";
 
-const AlliesLibrary = async ({ searchParams }: any) => {
+const AlliesLibrary = async ({ searchParams }: SearchParams) => {
   console.log("PAGE LOADED");
 
   const filters = await searchParams;

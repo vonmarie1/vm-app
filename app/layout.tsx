@@ -25,7 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
       <body className={`${bricolage.variable} antialiased`}>
-        <ClerkProvider appearance={{ variables: { colorPrimary: "#D600FF" } }}>
+        <ClerkProvider
+          appearance={{ variables: { colorPrimary: "#D600FF" } }}
+          afterSignOutUrl="/"
+        >
           <Navbar />
           {children}
         </ClerkProvider>

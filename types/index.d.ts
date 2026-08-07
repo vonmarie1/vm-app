@@ -17,13 +17,15 @@ enum Subject {
   business = "business",
 }
 
-type Ally = Models.DocumentList<Models.Document> & {
-  $id: string;
+type Ally = {
+  id: string;
   name: string;
-  subject: Subject;
+  subject: string;
   topic: string;
+  voice: string;
+  style: string;
   duration: number;
-  bookmarked: boolean;
+  author: string;
 };
 
 interface CreateAlly {
@@ -80,4 +82,5 @@ interface AllyComponentProps {
   userImage: string;
   voice: string;
   style: string;
+  duration: number;
 }

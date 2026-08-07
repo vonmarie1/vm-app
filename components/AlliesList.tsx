@@ -8,13 +8,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { cn } from "@/lib/utils";
+import { cn, getSubjectColor, getSubjectIcon } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import { getSubjectColor } from "@/lib/utils";
 interface AlliesListProps {
   title: string;
-  companions?: Ally[];
+  companions?: Pick<
+    Ally,
+    "id" | "subject" | "name" | "topic" | "duration"
+  >[];
   classNames?: string;
 }
 const AlliesList = ({ title, companions, classNames }: AlliesListProps) => {
@@ -34,14 +36,14 @@ const AlliesList = ({ title, companions, classNames }: AlliesListProps) => {
           {companions?.map(({ id, subject, name, topic, duration }) => (
             <TableRow key={id}>
               <TableCell>
-                <Link href={`/companions/${id}`}>
+                <Link href={`/allies/${id}`}>
                   <div className="flex items-center gap-2">
                     <div
                       className="size-18 flex items-center justify-center rounded-lg max-md:hidden"
                       style={{ backgroundColor: getSubjectColor(subject) }}
                     >
                       <Image
-                        src={`/icons/${subject}.svg`}
+                        src={getSubjectIcon(subject)}
                         alt={subject}
                         width={35}
                         height={35}
@@ -63,7 +65,7 @@ const AlliesList = ({ title, companions, classNames }: AlliesListProps) => {
                   style={{ backgroundColor: getSubjectColor(subject) }}
                 >
                   <Image
-                    src={`/icons/${subject}.svg`}
+                    src={getSubjectIcon(subject)}
                     alt={subject}
                     width={18}
                     height={18}

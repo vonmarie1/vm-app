@@ -42,7 +42,7 @@ const AllyCard = ({
         />
         <p className="texsm">{duration} mins duration</p>
       </div>
-      <Link href={`/compaions/${id}`} className="w-full">
+      <Link href={`/allies/${id}`} className="w-full">
         <button className="btn-primary w-full justify-center">
           Launch Lesson
         </button>

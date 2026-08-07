@@ -28,7 +28,7 @@ const Navbar = () => {
             <button className="btn-signin">Sign In</button>
           </SignInButton>
         ) : (
-          <UserButton afterSignOutUrl="/" />
+          <UserButton />
         )}
       </div>
     </nav>
